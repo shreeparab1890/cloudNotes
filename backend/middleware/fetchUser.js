@@ -11,7 +11,6 @@ export const fetchUser = (req, res, next) => {
   try {
     const data = jwt.verify(token, JWT_SECRET);
     req.user = data;
-    console.log(data);
     next();
   } catch (error) {
     res.status(401).json("Please authenticate with valid token");
