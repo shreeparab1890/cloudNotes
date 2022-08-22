@@ -3,7 +3,7 @@ import connecttoMongo from "./db.js";
 import authRouter from "./routes/auth.js";
 import notesRouter from "./routes/notes.js";
 
-connecttoMongo();
+const db_connect = connecttoMongo();
 const app = express();
 const port = 5000;
 app.use(express.json({ limit: "30mb", extended: true }));
@@ -17,4 +17,7 @@ app.get("/", (req, res) => {
 
 app.listen(port, () => {
   console.log(`CloudNotes listening on port ${port}`);
+  if (!db_connect) {
+    console.log("Waiting for DB to connect");
+  }
 });
