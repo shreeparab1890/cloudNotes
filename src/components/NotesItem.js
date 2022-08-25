@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import noteContext from "../context/notes/noteContext";
 
 const NotesItem = (props) => {
-  const { note } = props;
+  const { note, updatenote } = props;
   const context = useContext(noteContext);
   const { deleteNote } = context;
   return (
@@ -13,7 +13,12 @@ const NotesItem = (props) => {
         <Card.Body>
           <div className="d-flex align-item-center">
             <Card.Title>{note.title}</Card.Title>
-            <i className="fa-solid fa-pen-to-square mx-2"></i>
+            <i
+              className="fa-solid fa-pen-to-square mx-2"
+              onClick={() => {
+                updatenote(note);
+              }}
+            ></i>
             <i
               className="fa-solid fa-trash-can mx-2"
               onClick={() => {

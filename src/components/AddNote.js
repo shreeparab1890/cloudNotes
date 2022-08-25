@@ -10,13 +10,18 @@ const AddNote = () => {
   const [note, setNote] = useState({
     title: "",
     description: "",
-    tag: "Default",
+    tag: "",
   });
 
   const handleClick = (e) => {
     e.preventDefault();
     console.log(note);
     addNote(note.title, note.description, note.tag);
+    setNote({
+      title: "",
+      description: "",
+      tag: "",
+    });
   };
 
   const onChange = (e) => {
@@ -38,6 +43,9 @@ const AddNote = () => {
                 type="text"
                 placeholder="Enter title"
                 onChange={onChange}
+                minLength={5}
+                required
+                value={note.title}
               />
             </Form.Group>
 
@@ -49,6 +57,9 @@ const AddNote = () => {
                 id="description"
                 name="description"
                 onChange={onChange}
+                minLength={5}
+                required
+                value={note.description}
               />
             </Form.Group>
 
@@ -60,10 +71,16 @@ const AddNote = () => {
                 id="tag"
                 name="tag"
                 onChange={onChange}
+                value={note.tag}
               />
             </Form.Group>
 
-            <Button variant="primary" type="submit" onClick={handleClick}>
+            <Button
+              disabled={note.title.length < 5 || note.description.length < 5}
+              variant="primary"
+              type="submit"
+              onClick={handleClick}
+            >
               Add Note
             </Button>
           </Form>
