@@ -5,10 +5,14 @@ import AddNote from "./AddNote";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes, updateNote } = context;
+  const navigate = useNavigate();
+
+  const { showAlert } = props;
 
   const [show, setShow] = useState(false);
 
@@ -23,7 +27,12 @@ const Notes = () => {
   const handleShow = () => setShow(true);
 
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem("token")) {
+      getNotes();
+    } else {
+      navigate("/login");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const update = (currentNote) => {
@@ -41,6 +50,7 @@ const Notes = () => {
 
   const handleClick = (e) => {
     updateNote(note.id, note.etitle, note.edescription, note.etag);
+    showAlert("Note Updated Successfully.", "success");
     refclose.current.click();
   };
 
@@ -50,7 +60,7 @@ const Notes = () => {
 
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={showAlert} />
       <Button
         ref={ref}
         className="d-none"
@@ -126,7 +136,9 @@ const Notes = () => {
           {notes.length === 0 && "No Notes to Display"}
         </div>
         {notes?.map((note) => {
-          return <NotesItem updatenote={update} note={note} />;
+          return (
+            <NotesItem updatenote={update} note={note} showAlert={showAlert} />
+          );
         })}
       </div>
     </>

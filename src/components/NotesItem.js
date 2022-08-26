@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card";
 import noteContext from "../context/notes/noteContext";
 
 const NotesItem = (props) => {
-  const { note, updatenote } = props;
+  const { note, updatenote, showAlert } = props;
   const context = useContext(noteContext);
   const { deleteNote } = context;
   return (
@@ -23,6 +23,7 @@ const NotesItem = (props) => {
               className="fa-solid fa-trash-can mx-2"
               onClick={() => {
                 deleteNote(note._id);
+                showAlert("Note Deleted Successfully.", "success");
               }}
             ></i>
           </div>

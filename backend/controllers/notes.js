@@ -13,7 +13,8 @@ export const notes = (req, res) => {
 export const getNotesByUser = async (req, res) => {
   try {
     const id = req.user.id;
-    const notes = await notesModel.find({ id });
+    console.log(id);
+    const notes = await notesModel.find({ user: id });
     return res.status(200).json({ notes });
   } catch (error) {
     res.status(500).send("Internal Server Error");

@@ -9,9 +9,11 @@ const AppAlert = (props) => {
 
   return (
     <div style={{ height: "50px" }}>
-      <Alert key={props.alert?.type} variant={props.alert?.type}>
-        {props.alert?.msg}
-      </Alert>
+      {props.alert && (
+        <Alert key={props.alert?.type} variant={props.alert?.type}>
+          {props.alert?.msg}
+        </Alert>
+      )}
     </div>
   );
 };
