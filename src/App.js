@@ -8,6 +8,7 @@ import AppAlert from "./components/Alert";
 import { useState } from "react";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Footer from "./components/Footer";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -36,6 +37,7 @@ function App() {
           </Routes>
         </div>
       </NoteState>
+      <Footer />
     </BrowserRouter>
   );
 }

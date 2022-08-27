@@ -42,8 +42,8 @@ const Login = (props) => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6">
+        <div className="col-md-4"></div>
+        <div className="col-md-5">
           <h1 style={{ textAlign: "center" }}> LOGIN </h1>
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
